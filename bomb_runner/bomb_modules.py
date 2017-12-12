@@ -1,4 +1,4 @@
-import time, os
+import time, os, msvcrt
 
 def module_one():
 	'''Wires'''
@@ -190,4 +190,77 @@ def module_five():
 		print("BOOM")
 		time.sleep(1)
 		return False
+'''Start of Module 6'''
+turns = 0
+plyr_x = 0
+plyr_y = 1
+maze = [
+		['+','+','+','+','+','+','+','+','+','+','+','+','+'],
+		['S',' ',' ','+',' ',' ',' ',' ',' ',' ',' ',' ','+'],
+		['+',' ',' ','+',' ','+','+','+',' ','+','+','+','+'],
+		['+',' ',' ',' ',' ',' ','+','+',' ',' ',' ',' ','+'],
+		['+',' ','+',' ','+',' ','+','+','+','+','+',' ','+'],
+		['+',' ','+',' ','+',' ','+',' ',' ',' ','+',' ','+'],
+		['+',' ','+',' ',' ',' ','+',' ','+',' ','+',' ','+'],
+		['+',' ','+',' ','+','+',' ',' ','+',' ','+',' ','+'],
+		['+',' ','+',' ','+','+','+','+','+',' ','+',' ','+'],
+		['+',' ','+',' ',' ',' ',' ',' ',' ',' ','+',' ','E'],
+		['+','+','+','+','+','+','+','+','+','+','+','+','+']
+]
+
+def module_six():
+	
+	def print_maze(arr):
+		os.system("cls")
+		print("Solve the maze in 24 steps!     Steps: {}".format(turns))
+		for y in range(0 ,11):
+			for x in range(0, 13):
+				if x == plyr_x and y == plyr_y:
+					print('P ', end = '')
+				else:
+					print(arr[y][x] + ' ', end = '')
+			print()
+
+	def move_player(arr):
+		global plyr_x, plyr_y, turns
+		direction = msvcrt.getwch()
+		if direction == 'W' or direction == 'w':
+			if arr[plyr_y - 1][plyr_x] != '+':
+				plyr_y -= 1
+
+		elif direction == 'S' or direction == 's':
+			if arr[plyr_y + 1][plyr_x] != '+':
+				plyr_y += 1
+		elif direction == 'A' or direction == 'a':
+			if arr[plyr_y][plyr_x - 1] != '+':
+				plyr_x -= 1
+		elif direction == 'D' or direction == 'd':
+			if arr[plyr_y][plyr_x + 1] != '+':
+				plyr_x += 1
+		elif direction == 'q':
+			quit()
+		turns += 1
+
+	def check_if_won():
+		global plyr_x, plyr_y, maze
+		if plyr_x == 12 and plyr_y == 9:
+			print_maze(maze)
+			print("YOU DID IT!!")
+			time.sleep(2)
+			return True
+	while turns <= 24:
+		print_maze(maze)
+		move_player(maze)
+		if turns == 24:
+			if check_if_won() == True:
+				return True
+			else:
+				print_maze(maze)
+				print("Sorry you failed!")
+				time.sleep(1)
+				return False
+	print_maze(maze)
+	print("Sorry you failed!")
+	time.sleep(1)
+	return False	
 	
