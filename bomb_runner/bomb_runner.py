@@ -51,7 +51,7 @@ def intro():
 	print(" / /_/ / /_/ /  / /___/ / / / /_/ (__  )  __/  / /_/ / /_/ (__  ) /_/ / / / / /  ")
 	print("/_____/\__, /   \____/_/ /_/\__,_/____/\___/   \____/ .___/____/\__,_/_/ /_/_/   ")
 	print("      /____/                                       /_/                           \n\n")
-	input("Press any key to start!")
+	input("Press ENTER to start!")
 
 
 def bomb_init():
